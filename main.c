@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 
 #define TAM 3
 
@@ -14,6 +15,7 @@ typedef struct
 
 typedef struct
 {
+    int id;
     int legajo;
     char nombre[20];
     char sexo;
@@ -26,7 +28,9 @@ typedef struct
 
 void mostrarEmpleado(eEmpleado* employee);
 void cargaEmpleado(eEmpleado* employee, int cant);
-void cargaEmpleado(eEmpleado* employee, int cant);
+void ordenarEmpleados(eEmpleado* employee, int tam);
+void mostrarEmpleados(eEmpleado* employee, int tam);
+
 
 int main()
 {
@@ -42,8 +46,8 @@ int main()
     unEmpleado.fechaIngreso.mes=9;
     unEmpleado.fechaIngreso.anio=2018;*/
     cargaEmpleado(employee, TAM);
-
-    mostrarEmpleado(employee);
+    mostrarEmpleados(employee,TAM);
+    //mostrarEmpleado(employee);
 
     return 0;
 }
@@ -51,25 +55,41 @@ int main()
 
 void mostrarEmpleado(eEmpleado* employee)
 {
+system("cls");
+system("clear");
 
+    printf("\n==============================================");
+    printf("\nID: %d", employee->id);
     printf("\nLegajo: %d", employee->legajo);
     printf("\nNombre: %s", employee->nombre);
     printf("\nSexo: %c", employee->sexo);
     printf("\nSueldo: %.2f", employee->sueldo);
     printf("\nFecha de Ingreso: %d/%d/%d\n", employee->fechaIngreso.dia, employee->fechaIngreso.mes, employee->fechaIngreso.anio);
+    printf("\n==============================================");
 
 }
 
 void cargaEmpleado(eEmpleado* employee, int cant)
 {
-    int i;
+system("cls");
+system("clear");
+    //int i;
+    char resp='s';
 
-    for(i=0; i<cant; i++)
+
+    do
     {
 
-    printf("\nIngrese legajo: ");
+    if(employee->id >=0 && employee->id <=cant && employee != NULL)
+    {
+        employee->id++;
+        employee->legajo++;
+
+    }
+
+    /*printf("\nIngrese legajo: ");
     scanf("%d", &employee->legajo);
-    getchar();
+    getchar();*/
 
     printf("\nIngrese nombre: ");
     fflush(stdin);
@@ -84,22 +104,30 @@ void cargaEmpleado(eEmpleado* employee, int cant)
     getchar();
 
     printf("\nIngrese fecha ingreso (dia): ");
-    scanf("%d", employee->fechaIngreso.dia);
+    scanf("%d", &employee->fechaIngreso.dia);
     getchar();
 
     printf("\nIngrese fecha ingreso (mes): ");
-    scanf("%d", employee->fechaIngreso.mes);
+    scanf("%d", &employee->fechaIngreso.mes);
     getchar();
 
     printf("\nIngrese fecha ingreso (anio): ");
-    scanf("%d", employee->fechaIngreso.anio);
+    scanf("%d", &employee->fechaIngreso.anio);
     getchar();
-    }
+
+    printf("\nDesea continuar: ");
+    scanf("%c", &resp);
+    getchar();
+
+
+}while(resp != 'n');
 
 }
 
 void ordenarEmpleados(eEmpleado* employee, int tam)
 {
+system("cls");
+system("clear");
 
     eEmpleado auxEmpleado;
     int i;
@@ -117,6 +145,27 @@ void ordenarEmpleados(eEmpleado* employee, int tam)
             }
         }
     }
+}
 
+void mostrarEmpleados(eEmpleado* employee, int tam)
+{
+system("cls");
+system("clear");
+
+int i;
+
+printf("\n==============================================");
+
+for(i=0; i<tam; i++)
+{
+
+    printf("\nID: %d", employee->id);
+    printf("\nLegajo: %d", employee->legajo);
+    printf("\nNombre: %s", employee->nombre);
+    printf("\nSexo: %c", employee->sexo);
+    printf("\nSueldo: %.2f", employee->sueldo);
+    printf("\nFecha de Ingreso: %d/%d/%d\n", employee->fechaIngreso.dia, employee->fechaIngreso.mes, employee->fechaIngreso.anio);
+
+}
 
 }
